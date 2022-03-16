@@ -13,26 +13,12 @@ Router.onRouteChangeComplete = (url) => nprogress.done();
 Router.onRouteChangeError = (url) => nprogress.done();
 
 const Navbar = () => {
-    
-    let logo = [
-        'Hackr.io_','H', 'Ha', 'Hac', 'Hack', 'Hackr', 'Hackr.', 'Hackr.i', 'Hackr.io', 'Hackr.io_',
-    ];
-
-    let [logoNum, setLogoNum] = useState(0);
-
-    // setInterval(
-    //     () => {
-    //         logoNum < logo.length
-    //             ? setLogoNum(logoNum+1)
-    //             : setLogoNum(logoNum-1);
-    //     }
-    // , 700);
-
+   
     return (
         <div className={styles.navbar}>
             <Link href="/" passHref>
             <div className={styles.navbarLeft}>
-                {logo[logoNum]}
+                Hackr.io_
             </div>
             </Link>
             <div className={styles.navbarRight}>
