@@ -9,7 +9,6 @@ import { Authenticate, isAuth } from '../util/Auth'
 
 const Login = () => {
     
-    
     const router = useRouter();
     
     useEffect(() => {
@@ -27,7 +26,18 @@ const Login = () => {
     const { email, password } = state;
 
     const handleSubmit = async e => {
-        
+        e.preventDefault();
+        setState({ ...state, buttonText: 'Processing...' });
+        try {
+            const res = await axios.post(`${API}/login`, { email, password });
+            setState({ ...state, message: res.data.message, messageType: 1 });
+            Authenticate(
+                res, () => isAuth()?.role === 'user' ? router.push('/user') : router.push('/admin')
+            );
+        }
+        catch (err) {
+            setState({ ...state, message: err.response?.data.message, messageType: 2 });
+        }
     }
 
   return (
