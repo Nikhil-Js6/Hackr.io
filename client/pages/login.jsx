@@ -4,9 +4,17 @@ import styles from '../styles/Login.module.css'
 import { API } from '../config'
 import axios from 'axios'
 import { Alert } from '../util/Alerts'
+import { Authenticate, isAuth } from '../util/Auth'
 
 
 const Login = () => {
+    
+    
+    const router = useRouter();
+    
+    useEffect(() => {
+        isAuth() && router.push('/');
+    }, [isAuth]);
 
     const [state, setState] = useState({
         email: '',
