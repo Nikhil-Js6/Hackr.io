@@ -1,11 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import styles from '../styles/Register.module.css'
 import { API } from '../config'
 import axios from 'axios'
 import { Alert } from '../util/Alerts'
+import { isAuth } from '../util/Auth'
 
 
 const Register = () => {
+    
+    const router = useRouter();
+    
+    useEffect(() => {
+        isAuth() && router.push('/');
+    }, [isAuth]);
 
     const [state, setState] = useState({
         name : 'nikhil',
@@ -25,7 +33,8 @@ const Register = () => {
         try {
             const res = await axios.post(`${API}/register`, formData);
             setState({ ...state, message: res.data.message, messageType: 1 });
-        }catch(err) {
+        }
+        catch (err) {
             setState({ ...state, message: err.response.data.message, messageType: 2 });
         }
         setTimeout(() => {
