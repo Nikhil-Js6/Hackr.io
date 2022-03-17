@@ -4,6 +4,7 @@ import styles from '../styles/Navbar.module.css';
 import Router from 'next/router';
 import nprogress from 'nprogress';
 import 'nprogress/nprogress.css';
+import { isAuth, Logout } from '../util/Auth'
 
 
 // Start and end prgress bar with route change:
@@ -13,7 +14,17 @@ Router.onRouteChangeComplete = (url) => nprogress.done();
 Router.onRouteChangeError = (url) => nprogress.done();
 
 const Navbar = () => {
-   
+       
+    const router = useRouter();
+    useEffect(() => {
+        !isAuth() && router.push('/login');
+    }, [isAuth]);
+
+    const handleLogout = () => {
+        Logout();
+        router.push('/login');
+    }
+
     return (
         <div className={styles.navbar}>
             <Link href="/" passHref>
