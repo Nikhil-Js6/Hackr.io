@@ -32,14 +32,23 @@ const Navbar = () => {
                 Hackr.io_
             </div>
             </Link>
-            <div className={styles.navbarRight}>
-                <Link href={'/login'} passHref>
-                    <span className={styles.navbarRightItem}>Login</span>
-                </Link>
-                <Link href={'/register'} passHref>
-                    <span className={styles.navbarRightItem}>Register</span>
-                </Link>
-            </div>
+            { isAuth()
+                ? (
+                    <div className={styles.navbarRight}>
+                        <span className={styles.navbarRightItem}>{isAuth().name}</span>
+                        <span onClick={handleLogout} className={styles.navbarRightItem}>Logout</span>
+                    </div>
+                ) : (
+                    <div className={styles.navbarRight}>
+                        <Link href={'/login'} passHref>
+                            <span className={styles.navbarRightItem}>Login</span>
+                        </Link>
+                        <Link href={'/register'} passHref>
+                            <span className={styles.navbarRightItem}>Register</span>
+                        </Link>
+                    </div>
+                )
+            }
         </div>
     )
 }
