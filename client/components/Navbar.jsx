@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from '../styles/Navbar.module.css';
 import Router from 'next/router';
 import nprogress from 'nprogress';
@@ -16,9 +16,6 @@ Router.onRouteChangeError = (url) => nprogress.done();
 const Navbar = () => {
        
     const router = useRouter();
-    useEffect(() => {
-        !isAuth() && router.push('/login');
-    }, [isAuth]);
 
     const handleLogout = () => {
         Logout();
@@ -35,7 +32,9 @@ const Navbar = () => {
             { isAuth()
                 ? (
                     <div className={styles.navbarRight}>
-                        <span className={styles.navbarRightItem}>{isAuth().name}</span>
+                        <Link href={`${isAuth().role}`} passHref>
+                            <span className={styles.navbarRightItem}>{isAuth().name}</span>
+                        </Link>
                         <span onClick={handleLogout} className={styles.navbarRightItem}>Logout</span>
                     </div>
                 ) : (
