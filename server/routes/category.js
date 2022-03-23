@@ -1,8 +1,7 @@
 const router = require('express').Router();
 
 const { 
-    getCategory, 
-    getAllCategories, 
+    getCategories, 
     createCategory, 
     updateCategory, 
     deleteCategory } 
@@ -14,11 +13,9 @@ const { runValidation } = require('../validators');
 const { verifyAdmin } = require('../middlewares/verifyToken');
 
 
-router.post('/category/', categoryCreateValidator, runValidation, verifyAdmin, createCategory);
+router.post('/category/create', categoryCreateValidator, runValidation, verifyAdmin, createCategory);
 router.put('/categories/:slug', categoryUpdateValidator, runValidation, verifyAdmin, updateCategory);
-router.delete('/categories/:slug', verifyAdmin , deleteCategory);
-router.get('/categories/:slug', getCategory);
-router.get('/categories/', getAllCategories);
-
+router.delete('/categories/:slug', verifyAdmin, deleteCategory);
+router.get('/categories/get', getCategories);
 
 module.exports = router;
