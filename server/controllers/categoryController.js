@@ -50,6 +50,70 @@ class CategoryController {
 
     }
     
+    // using Form Data:
+    
+//     async createCategory(req, res) {
+
+    //     const form = new IncomingForm();
+
+    //     form.parse(req, (err, fields, files) => {
+    //         if (err) {
+    //             return res.status(400).json({
+    //                 message: 'Can\'t Upload Image!'
+    //             });
+    //         }
+    //         const { name, content } = fields;
+    //         const { image } = files;
+    //         const slug = slugify(name);
+
+    //         const newCategory = new Category({ name, content, slug });
+
+    //         if (!image) {
+    //             return res.status(400).json({
+    //                 message: 'Image is required'
+    //             })
+    //         }
+    //         if (image.size > 2000000) {
+    //             return res.status(400).json({
+    //                 message: 'Image should be less than 2MB.'
+    //             });
+    //         }
+
+    //         // s3 bucket instance:
+    //         const bucketParams = {
+    //             Bucket: 'hackr.io-s3-nikhil',
+    //             Key: `category/${uuidv4()}`,
+    //             Body: fs.readFileSync(image.filepath), // to read file synchronously
+    //             ACL: 'public-read',
+    //             ContentType: 'image/jpg',
+    //         }
+
+    //         s3.upload(bucketParams, (err, data) => {
+    //             if (err) {
+    //                 console.log(err);
+    //                 return res.status(400).json({
+    //                     message: 'Can\'t Upload to s3'
+    //                 });
+    //             }
+    //             newCategory.image.url = data.Location;
+    //             newCategory.image.key = data.Key;
+    //             newCategory.postedBy = req.user._id;
+
+    //             newCategory.save((err, data) => {
+    //                 if (err) {
+    //                     return res.status(400).json({
+    //                         message: 'Can\'t Create Category!'
+    //                     })
+    //                 }
+    //                 return res.status(201).json({
+    //                     message: 'Category Created Successfully!',
+    //                     data
+    //                 });
+    //             })
+    //         });
+    //     });
+    // }
+    
 }
 
 module.exports = new CategoryController();
