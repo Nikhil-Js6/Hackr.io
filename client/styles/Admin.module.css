@@ -1,0 +1,31 @@
+.adminWrapper{
+    padding: 20px 50px;
+    margin-top: 50px;
+}
+.admin{
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.adminHeading{
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(34, 214, 154);
+}
+.adminLeft{
+    flex: 1;
+}
+.adminOptionsList{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+.adminOption{
+    margin-bottom: 10px;
+    color: rgb(28, 123, 231);
+}
+.adminRight{
+    flex: 2;
+}
