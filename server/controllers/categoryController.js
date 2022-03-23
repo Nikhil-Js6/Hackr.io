@@ -9,6 +9,38 @@ class CategoryController {
     async createCategory(req, res) {
 
     }
+    
+    async getCategories(req, res) {
+        const slug = req.query.category;
+        if (slug === 'all') {
+            try {
+                const categories = await Category.find();
+                return res.status(200).json({
+                    message: 'Successfully Fetched All Categories!',
+                    categories
+                });
+            }
+            catch (err) {
+                return res.status(500).json({
+                    message: 'Can\'t Load Categories'
+                })
+            }
+        }
+        else{
+            try {
+                const categories = await Category.find({ slug });
+                return res.status(200).json({
+                    message: `Successfully Fetched ${slug} Category!`,
+                    categories
+                });
+            }
+            catch (err) {
+                return res.status(500).json({
+                    message: 'Can\'t Load Categories'
+                })
+            }
+        }
+    }
 
     async updateCategory(req, res) {
 
@@ -18,13 +50,6 @@ class CategoryController {
 
     }
     
-    async getCategory(req, res) {
-        
-    }
-
-    async getAllCategories(req, res) {
-
-    }
 }
 
 module.exports = new CategoryController();
