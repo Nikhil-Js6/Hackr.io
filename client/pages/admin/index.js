@@ -1,10 +1,43 @@
+import styles from '../../styles/Admin.module.css'
 import { API } from '../../config'
 import axios from 'axios'
+import Link from 'next/link'
 
-const Admin = ({ userInfo }) => {
-
+const Admin = () => {
+    
     return (
-        <div>{JSON.stringify(userInfo)}</div>
+        <div className={styles.adminWrapper}>
+            <h1 className={styles.adminHeading}>Admin Dashboard:</h1>
+            <div className={styles.admin}>
+                <div className={styles.adminLeft}>
+                    <ul className={styles.adminOptionsList}>
+                        <li className={styles.adminOption}>
+                            <Link href={'/admin/categories/create'}>
+                                Create Category
+                            </Link>
+                        </li>
+                        <li className={styles.adminOption}>
+                            <Link href={'/admin/categories/get?category=all'}>
+                                Get All Categories
+                            </Link>
+                        </li>
+                        <li className={styles.adminOption}>
+                            <Link href={'/admin/categories/create'}>
+                                Update Category
+                            </Link>
+                        </li>
+                        <li className={styles.adminOption}>
+                            <Link href={'/admin/categories/create'}>
+                                Delete Category
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+                <div className={styles.adminRight}>
+                    Categories
+                </div>
+            </div>
+        </div>
     )
 }
 
@@ -15,27 +48,6 @@ export const getServerSideProps  = async (context) => {
             redirect: {
                 destination: "/",
                 permanent: false,
-            }
-        }
-    }
-    try {
-        const res = await axios.get(`${API}/admin`, {
-            headers: {
-                authorization: `Bearer ${token}`,
-            }
-        });
-        return {
-            props: { userInfo: res.data}
-        };
-    }
-    catch (err) {
-        if (err.response.data.message) {
-            return {
-                redirect:{
-                    destination: '/',
-                    permanent: false
-                },
-                props: { userInfo: err.response.data.message }
             }
         }
     }
