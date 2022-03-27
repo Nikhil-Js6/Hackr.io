@@ -1,0 +1,88 @@
+.createWrapper{
+    padding: 0 50px;
+    margin-top: 70px;
+    margin-bottom: 78px;
+}
+.createHeading{
+    margin-left: 50px;
+    font-size: 32px;
+    font-weight: 400;
+    color: #5293e4;
+}
+.create{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+.form{
+    width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+.upload{
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.upload .label{
+    color: #1775e5;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.upload .input{
+    display: none;
+}
+.label{
+    color: #666;
+}
+.input{
+    width: 100%;
+    height: 30px;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid grey;
+    border-radius: 6px;
+}
+.textarea{
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 70px;
+    min-height: 105px;
+    margin: 8px 0;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 6px;
+}
+.input:focus{
+    outline: none;
+    border: 1px solid #1775e5;
+    box-shadow: 1px 1px 10px 0px rgb(131, 194, 253);
+}
+.button{
+    height: 35px;
+    width: 33%;
+    margin-top: 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    background-color: rgb(46, 154, 255);
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.button:focus{
+    outline: none;
+}
+.button:hover{
+    color: #fff;
+    background-color: #1775e7;
+}
