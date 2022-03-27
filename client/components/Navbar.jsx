@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import { useEffect } from 'react';
-import styles from '../styles/Navbar.module.css';
-import Router from 'next/router';
-import nprogress from 'nprogress';
-import 'nprogress/nprogress.css';
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import styles from '../styles/Navbar.module.css'
+import Router from 'next/router'
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 import { isAuth, Logout } from '../util/Auth'
 
 
@@ -14,9 +14,9 @@ Router.onRouteChangeComplete = (url) => nprogress.done();
 Router.onRouteChangeError = (url) => nprogress.done();
 
 const Navbar = () => {
-       
+    
     const router = useRouter();
-
+    
     const handleLogout = () => {
         Logout();
         router.push('/login');
@@ -24,14 +24,17 @@ const Navbar = () => {
 
     return (
         <div className={styles.navbar}>
-            <Link href="/" passHref>
             <div className={styles.navbarLeft}>
-                Hackr.io_
+                <Link href="/" passHref>
+                    <span className={styles.logo}>Hackr.io_</span>
+                </Link>
             </div>
-            </Link>
             { isAuth()
                 ? (
                     <div className={styles.navbarRight}>
+                        <Link href={`/user/link/create`} passHref>
+                            <span className={styles.navbarRightItem}>Submit a Link</span>
+                        </Link>
                         <Link href={`${isAuth().role}`} passHref>
                             <span className={styles.navbarRightItem}>{isAuth().name}</span>
                         </Link>
@@ -39,6 +42,9 @@ const Navbar = () => {
                     </div>
                 ) : (
                     <div className={styles.navbarRight}>
+                        <Link href={`/user/link/create`} passHref>
+                            <span className={styles.navbarRightItem}>Submit a Link</span>
+                        </Link>
                         <Link href={'/login'} passHref>
                             <span className={styles.navbarRightItem}>Login</span>
                         </Link>
