@@ -20,11 +20,13 @@ mongoose.connection.on('connected', () => {
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/user');
 const categoryRoute = require('./routes/category');
+const linkRoute = require('./routes/link');
 
 // MiddleWares
 app.use('/api', authRoute);
 app.use('/api', userRoute);
 app.use('/api', categoryRoute);
+app.use('/api', linkRoute);
 
 let port = process.env.PORT || 3300;
 
