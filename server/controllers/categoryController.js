@@ -66,14 +66,35 @@ class CategoryController {
             }
         }
         else{
+
+            let limit = req.body.limit ? parseInt(req.body.limit): 10;
+            let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+
             try {
-                const categories = await Category.find({ slug });
-                return res.status(200).json({
-                    message: `Successfully Fetched ${slug} Category!`,
-                    categories
-                });
+                const categories = await Category.findOne({ slug })
+                   .populate('postedBy', '_id, name, username');
+                
+                await Link.find({ categories })
+                   .populate('categories', 'name')
+                   .populate('postedBy', '_id, name, username')
+                   .sort({ createdAt: - 1 })
+                   .limit(limit)
+                   .skip(skip)
+                   .exec((err, links) => {
+                       if (err) {
+                           return res.status(500).json({
+                               message: 'Can\'t Load Links'
+                           })
+                       }
+                       res.status(200).json({
+                           message: `Successfully Fetched ${slug} Category!`,
+                           categories,
+                           links
+                       });
+                   });
             }
             catch (err) {
+                console.log(err);
                 return res.status(500).json({
                     message: 'Can\'t Load Categories'
                 })
@@ -91,7 +112,7 @@ class CategoryController {
     
     // using Form Data:
     
-//     async createCategory(req, res) {
+    //  async createCategory(req, res) {
 
     //     const form = new IncomingForm();
 
